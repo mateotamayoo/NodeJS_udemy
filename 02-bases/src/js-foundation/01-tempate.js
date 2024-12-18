@@ -9,6 +9,7 @@ const basicTemplate = `
 <body>
     <h1>Este es un encabezado H1</h1>
     <p>Este es un párrafo simple de texto.</p>
+    <p> hola</p>
 </body>
 </html>
 `;
