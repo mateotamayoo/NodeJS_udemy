@@ -12,10 +12,10 @@
 
 
 const buildMakePerson = ({getAge, getUUID}) => {
-    
+
     return ({name, birthdate}) => {
 
-        return { 
+        return {
             id: getUUID(),
             name: name,
             birthdate: birthdate,
@@ -23,6 +23,10 @@ const buildMakePerson = ({getAge, getUUID}) => {
         };
     }
 }
+
+module.exports = {
+    buildMakePerson
+};
 
 // const juan = buildPerson(obj);
 

@@ -1,4 +1,4 @@
-//desestructuración 
+//desestructuración
 
 // const {basicTemplate} = require('./js-foundation/01-tempate');
 
@@ -17,10 +17,13 @@ const { getAge, getUUID } = require('./plugins');
 //     console.log(user);
 // });
 
+
 const { buildMakePerson } = require('./js-foundation/05-factory');
 
-const makePerson = buildMakePerson({getUUID, getAge});
+const makePerson = buildMakePerson({ getUUID, getAge });
 
-const john = makePerson({name: 'John', birthdate: '01/01/2000'});
+const john1 = {name: 'John', birthdate: '01/01/2000'};
+
+const john = makePerson(john1);
 
 console.log(john);
