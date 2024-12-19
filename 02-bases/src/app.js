@@ -4,13 +4,23 @@
 
 // require('./js-foundation/02-destructuring')
 
-const { getUserById } =require('./js-foundation/03-callbacks');
+const { getAge, getUUID } = require('./plugins');
 
-const id = 1;
+//const { getUserById } =require('./js-foundation/05-factory');
 
-getUserById(id, (error, user) => {
-    if(error) {
-        throw new Error(error);
-    }
-    console.log(user);
-});
+// const id = 1;
+
+// getUserById(id, (error, user) => {
+//     if(error) {
+//         throw new Error(error);
+//     }
+//     console.log(user);
+// });
+
+const { buildMakePerson } = require('./js-foundation/05-factory');
+
+const makePerson = buildMakePerson({getUUID, getAge});
+
+const john = makePerson({name: 'John', birthdate: '01/01/2000'});
+
+console.log(john);
