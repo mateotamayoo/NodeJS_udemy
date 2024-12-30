@@ -1,4 +1,4 @@
-const basicTemplate = `
+export const basicTemplate = `
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,7 +13,3 @@ const basicTemplate = `
 </body>
 </html>
 `;
-
-module.exports = {
-    basicTemplate
-}

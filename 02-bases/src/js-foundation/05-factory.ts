@@ -10,10 +10,19 @@
 //meter la funcion uuidv4 no es correcto porque esta demasiado acoplado y si se detectan vulnerabilidades
 //tendriamos que cambiar en todos los archivos
 
+interface BuildMakePersonOptions {
+    getAge: (birthdate: string) => number;
+    getUUID: () => string;
+}
 
-const buildMakePerson = ({getAge, getUUID}) => {
+interface PersonOptions {
+    name: string;
+    birthdate: string;
+}
 
-    return ({name, birthdate}) => {
+export const buildMakePerson = ({getAge, getUUID}: BuildMakePersonOptions) => {
+
+    return ({name, birthdate}: PersonOptions) => {
 
         return {
             id: getUUID(),
@@ -23,10 +32,6 @@ const buildMakePerson = ({getAge, getUUID}) => {
         };
     }
 }
-
-module.exports = {
-    buildMakePerson
-};
 
 // const juan = buildPerson(obj);
 
