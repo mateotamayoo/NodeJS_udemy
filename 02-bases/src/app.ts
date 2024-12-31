@@ -27,15 +27,15 @@
 
 
 
-import { buildLogger } from "./plugins/logger.plugin";
+// import { buildLogger } from "./plugins/logger.plugin";
 
-const logger = buildLogger('app.js');
+// const logger = buildLogger('app.js');
 
-logger.log('Hello from app.js');
+// logger.log('Hello from app.js');
 
 
-export const name:string = "fernado";
-console.log(name)
+// export const name:string = "fernado";
+// console.log(name)
 
 
 
