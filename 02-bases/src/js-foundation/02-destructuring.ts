@@ -1,11 +1,11 @@
 //console.log(process.env);
 
 //variables de entorno
-const { SystemDrive,  windir} = process.env
+const { SystemDrive, windir } = process.env
 
 //console.table({SystemDrive,windir});
 
-const characters = ['Flash', 'Superman'];
+export const characters = ['Flash', 'Superman'];
 
-const [ ,Superman] = characters
+const [, Superman] = characters
 
