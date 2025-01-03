@@ -1,5 +1,7 @@
 // //desestructuración
 
+import { getUserById } from "./js-foundation/03-callbacks";
+
 // // const {basicTemplate} = require('./js-foundation/01-tempate');
 
 // // require('./js-foundation/02-destructuring')
@@ -24,7 +26,12 @@
 // //     .catch( ( err ) => console.log('Intenta de nuevo') )
 // //     .finally( () => console.log('Finalmente') )
 
-
+getUserById(1, (error, user) => {
+    if (error) {
+        throw new Error(error);
+    }
+    console.log(user);
+});
 
 
 // import { buildLogger } from "./plugins/logger.plugin";
