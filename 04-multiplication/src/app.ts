@@ -8,6 +8,9 @@ import { yarg } from './config/plugins/args.plugin';
 })();
 
 async function main() {
-    console.log('Hello, World!');
+    
+    
+    console.log(yarg);
+
     
 }
