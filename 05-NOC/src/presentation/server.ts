@@ -13,15 +13,19 @@ export class Server {
         console.log('server start...')
         console.log(envs.MAILER_SECRET_KEY, envs.MAILER_EMAIL)
 
-        const emailService = new EmailService();
-
-        emailService.sendEmail({
-            to:'mateo90710@gmail.com',
-            subject: 'Logs de sistema',
-            htmlBody: `
-            <h3> Logs de mejora, sin repeticion - NOC </h3>
-            `
-        })
+        // const emailService = new EmailService(
+        //     fileSystemRepository
+        // );
+        // emailService.sendEmailWithFileSystemLogs(
+        //     ['mateo90710@gmail.com','emailparahelado@gmail.com']
+        // )
+        // emailService.sendEmail({
+        //     to:'mateo90710@gmail.com',
+        //     subject: 'Logs de sistema',
+        //     htmlBody: `
+        //     <h3> Logs de mejora, sin repeticion - NOC </h3>
+        //     `,
+        // })
 
         // send email
 

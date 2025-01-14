@@ -1,15 +1,28 @@
 import nodemailer from 'nodemailer';
 import { envs } from '../../config/plugins/envs.plugins';
-import { env } from 'process';
+import {promises as fs} from 'fs'
+import path from 'path';
+import { LogRepository } from '../../domain/repository/log.repository';
+import { LogEntity, LogSeverityLevel } from '../../domain/entities/log.entity';
 
 interface SendMailOptions {
-    to:string;
+    to:string | string [];
     subject:string;
     htmlBody: string;
-    //todo attachments:
+    attachements?: Attachement[]
+}
+
+interface Attachement {
+    filename: string;
+    path: string;
 }
 
 export class EmailService {
+
+    constructor(
+        private readonly logRepository: LogRepository
+    ) {}
+
     private transporter = nodemailer.createTransport({
         service: envs.MAILER_SERVICE,
         auth: {
@@ -19,21 +32,49 @@ export class EmailService {
     });
 
     async sendEmail(options:SendMailOptions):Promise<boolean> {
-        const {to,subject,htmlBody} = options;
-
+        const { to, subject, htmlBody, attachements = [] } = options;
+        const log = new LogEntity({
+            level: LogSeverityLevel.low,
+            message: "",
+            origin: path.basename(__filename)
+        })
         try {
 
             const sentInformation = await this.transporter.sendMail({
                 to:to,
                 subject:subject,
-                html:htmlBody
+                html:htmlBody,
+                attachments: attachements
             })
-
-            console.log(sentInformation)
+            log.message="Email sent"
+            this.logRepository.saveLog(log);
 
             return true;
         } catch (error) {
+
+            log.message="Email not send"
+            this.logRepository.saveLog(log);
+
             return false;
         }
+    }
+
+    async sendEmailWithFileSystemLogs(to:string | string []) {
+        const htmlFilePath = path.join(__dirname, 'htmlBody.email.html');
+
+        const subject = 'Logs del servidor';
+
+        const htmlBody = await fs.readFile(htmlFilePath, 'utf8');
+
+        const attachements: Attachement[] = [
+            { filename: 'logs-all.log', path: './logs/logs-all.log'},
+            { filename: 'logs-meidum.log', path: './logs/logs-medium.log'},
+            { filename: 'logs-high.log', path: './logs/logs-high.log'}
+        ];
+
+        this.sendEmail({
+            to,subject, attachements, htmlBody
+        })
+
     }
 }
