@@ -12,7 +12,7 @@ export class Server {
     static start() {
         console.log('server start...')
 
-        CronService.createJob('*/5 * * * * *', 
+        CronService.createJob('*/5 * * * * *',
             () => {
                 new CheckService(
                     fileSystemRepository,
@@ -20,7 +20,6 @@ export class Server {
                     (error) => console.log(error),
                 ).execute('https://google.com')
                 // new CheckService().execute('https://localhost:3000')
-  
             }
         );
 
