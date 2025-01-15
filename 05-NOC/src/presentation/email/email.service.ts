@@ -20,7 +20,6 @@ interface Attachement {
 export class EmailService {
 
     constructor(
-        private readonly logRepository: LogRepository
     ) {}
 
     private transporter = nodemailer.createTransport({
@@ -33,11 +32,6 @@ export class EmailService {
 
     async sendEmail(options:SendMailOptions):Promise<boolean> {
         const { to, subject, htmlBody, attachements = [] } = options;
-        const log = new LogEntity({
-            level: LogSeverityLevel.low,
-            message: "",
-            origin: path.basename(__filename)
-        })
         try {
 
             const sentInformation = await this.transporter.sendMail({
@@ -46,15 +40,9 @@ export class EmailService {
                 html:htmlBody,
                 attachments: attachements
             })
-            log.message="Email sent"
-            this.logRepository.saveLog(log);
 
             return true;
         } catch (error) {
-
-            log.message="Email not send"
-            this.logRepository.saveLog(log);
-
             return false;
         }
     }
