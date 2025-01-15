@@ -2,10 +2,10 @@ import { LogRepositoryImpl } from "../infrastructure/repositories/log-impl.repos
 import { FileSystemDataSource } from "../infrastructure/datasources/file-system.datasource";
 import { envs } from "../config/plugins/envs.plugins";
 import { EmailService } from "./email/email.service";
-import { SendEmailLogs } from "../domain/use-cases/email/send-logs";
 
 const fileSystemRepository = new LogRepositoryImpl(
-    new FileSystemDataSource());
+    new FileSystemDataSource()
+);
 
     const emailService = new EmailService();
 
