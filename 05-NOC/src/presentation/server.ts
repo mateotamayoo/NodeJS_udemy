@@ -2,16 +2,21 @@ import { LogRepositoryImpl } from "../infrastructure/repositories/log-impl.repos
 import { FileSystemDataSource } from "../infrastructure/datasources/file-system.datasource";
 import { envs } from "../config/plugins/envs.plugins";
 import { EmailService } from "./email/email.service";
+import { CheckService } from "../domain/use-cases/checks/check-service";
+import { CronService } from "./cron/cron-service";
+import { MongoLogDataSource } from "../infrastructure/datasources/mongo-log.datasource";
+import { LogSeverityLevel } from "../domain/entities/log.entity";
 
-const fileSystemRepository = new LogRepositoryImpl(
-    new FileSystemDataSource()
+const logRepository = new LogRepositoryImpl(
+    // new FileSystemDataSource()
+    new MongoLogDataSource(),
 );
 
     const emailService = new EmailService();
 
 export class Server {
 
-    static start() {
+    public static async start() {
         console.log('server start...')
         console.log(envs.MAILER_SECRET_KEY, envs.MAILER_EMAIL)
 
@@ -38,11 +43,12 @@ export class Server {
 
         // send email
 
-
+        const logs = logRepository.getLog(LogSeverityLevel.high);
+        console.log(logs);
         // CronService.createJob('*/5 * * * * *',
         //     () => {
         //         new CheckService(
-        //             fileSystemRepository,
+        //             logRepository,
         //             () => console.log('success'),
         //             (error) => console.log(error),
         //         ).execute('https://google.com')
