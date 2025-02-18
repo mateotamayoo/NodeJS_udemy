@@ -1,7 +1,8 @@
 node_modules/
 dist/
 logs/
-mongo/
+
 postgres/
 mongo-test/
 postgres-test/
+coverage/
