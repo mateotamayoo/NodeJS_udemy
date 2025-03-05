@@ -38,6 +38,6 @@ async function main() {
     // await newLog.save();
 
     // console.log(newLog)
-    // Server.start();
+     Server.start();
 
 }

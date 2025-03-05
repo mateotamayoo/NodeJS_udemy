@@ -1,8 +1,16 @@
 node_modules/
 dist/
+
+# Logs
+.DS_Store
+
+
 logs/
 
+
+.env
+keys/
+mongo/
 postgres/
 mongo-test/
 postgres-test/
-coverage/

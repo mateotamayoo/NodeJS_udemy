@@ -3,10 +3,12 @@ import { FileSystemDataSource } from "../infrastructure/datasources/file-system.
 import { envs } from "../config/plugins/envs.plugins";
 import { EmailService } from "./email/email.service";
 import { PostgresLogDatasource } from "../infrastructure/datasources/postgres-log.datasource";
+import { CronService } from "./cron/cron-service";
+import { CheckService } from "../domain/use-cases/checks/check-service";
 
 const fileSystemRepository = new LogRepositoryImpl(
-    // new FileSystemDataSource(),
-    new PostgresLogDatasource(),
+     new FileSystemDataSource(),
+    //new PostgresLogDatasource(),
 );
 
     const emailService = new EmailService();
@@ -41,16 +43,16 @@ export class Server {
         // send email
 
 
-        // CronService.createJob('*/5 * * * * *',
-        //     () => {
-        //         new CheckService(
-        //             fileSystemRepository,
-        //             () => console.log('success'),
-        //             (error) => console.log(error),
-        //         ).execute('https://google.com')
-        //         // new CheckService().execute('https://localhost:3000')
-        //     }
-        // );
+        CronService.createJob('*/5 * * * * *',
+            () => {
+                new CheckService(
+                    fileSystemRepository,
+                    () => console.log('success'),
+                    (error) => console.log(error),
+                ).execute('https://google.com')
+                // new CheckService().execute('https://localhost:3000')
+            }
+        );
 
     }
 

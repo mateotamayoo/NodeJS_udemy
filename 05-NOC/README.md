@@ -14,3 +14,13 @@ docker compose up -d
 npx prisma migrate dev
 ```
 6.Ejecutar npm run dev
+
+
+//Errores experimentados
+
+- MongooseError: The uri parameter to openUri() must be a string, got "undefined". Make sure the first parameter to
+    Faltaba el setupTests
+- No creaba carpeta de mongo
+    En el docker:test editar el comando quitandole el fichero de las bases de datos de test
+- No detectaba base de datos NOC
+    O faltaba levantar el docker o algun comando tipo build o start junto con borrar carpetas de mongo y contenedores en docker
